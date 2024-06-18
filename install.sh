@@ -32,7 +32,6 @@
     chmod +x *
     cd ../
     clear
-    mkdir .termux/boot
     echo "termux-wake-lock ; shd ; cd ; cd termuxpack/ ; sh menu.sh ;" > start.sh
-    chmood +x start.sh    
-
+    chmood +x start.sh
+    
