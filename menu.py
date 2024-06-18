@@ -22,7 +22,7 @@ def get_ip_info():
 def phone_infoga():
     clear_screen()
     numero = input("Coloca el numero de telefono Ejemplo +34XXXXXXXX: ")
-    os.chdir('PhoneInfoga')
+    os.system('cd PhoneInfoga')
     subprocess.run(['python3', 'phoneinfoga.py', '-n', numero])
 
 def web_scan():
@@ -35,11 +35,11 @@ def web_scan():
     subprocess.run(['whois', ipweb])
 
 def nmap_scan():
-    os.chdir('Scan-Nmap')
+    os.system('cd Scan-Nmap')
     subprocess.run(['sh', 'scan.sh'])
 
 def phishing():
-    os.chdir('zphisher')
+    os.system('cd zphisher')
     subprocess.run(['bash', 'zphisher.sh'])
 
 def osint():
@@ -52,14 +52,9 @@ def osint():
     clear_screen()
     subprocess.run(['sudo', 'maigret', '-a', nick])
 
-def ddos():
-    clear_screen()
-    url = input("Inserta URL de la WEB con HTTP/HTTPS: ")
-    clear_screen()
-    subprocess.run(['slowhttptest', '-R', '-u', url, '-c', '1000', '-a', '10', '-b', '3000', '-r', '500'])
 
 def mask():
-    os.chdir('maskphish')
+    os.system('cd maskphish')
     subprocess.run(['bash', 'maskphish.sh'])
 
 def menu():
