@@ -32,7 +32,7 @@ function ip() {
 
 function PhoneInfoga() {
     clear
-    cd tools/PhoneInfoga/ || exit
+    cd tools/PhoneInfoga/
     echo "Coloca el numero de telefono Ejemplo +34XXXXXXXX"
     read -p ">>> " numero
     python3 phoneinfoga.py -n "$numero"
@@ -52,12 +52,12 @@ function webscan() {
 }
 
 function nmap() {
-    cd tools/Scan-Nmap/ || exit
+    cd tools/Scan-Nmap/
     sh scan.sh
 }
 
 function phis() {
-    cd tools/zphisher || exit
+    cd tools/zphisher/
     bash zphisher.sh
 }
 
@@ -87,7 +87,7 @@ function ddos() {
 }
 
 function mask() {
-    cd tools/maskphish/ || exit
+    cd tools/maskphish/
     bash maskphish.sh
 }
 
@@ -114,7 +114,7 @@ function menu() {
     echo ""
     echo "[+] 7 ---> Update"
     echo ""
-    echo "[+] 8 ---> IP Information" # Añadir opción para la función ip()
+    echo "[+] 8 ---> IP Information" 
     echo ""
     echo "[+] ------------------------- [+]"
     echo ""
@@ -130,7 +130,7 @@ function menu() {
         5) osint ;;
         6) ddos ;;
         7) update.sh ;;
-        8) ip ;;  # Llamar a la función ip() cuando se elige la opción 8
+        8) ip ;; 
         *) echo "Opción no válida" ;;
     esac
 }
