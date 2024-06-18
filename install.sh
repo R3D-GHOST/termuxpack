@@ -30,8 +30,7 @@
     mv config.example.py config.py
     python3 -m pip install -r requirments.txt
     chmod +x *
-    cd ../
+    cd
     clear
     echo "termux-wake-lock ; shd ; cd ; cd termuxpack/ ; sh menu.sh ;" > start.sh
-    chmood +x start.sh
-    
+    chmod +x start.sh
