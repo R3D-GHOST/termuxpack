@@ -1,94 +1,93 @@
-import os
-import requests
-import subprocess
-import time
+#!/bin/bash
 
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+clear_screen() {
+    clear
+}
 
-def get_ip_info():
-    clear_screen()
-    ip_address = input("Coloca la IP: ")
-    fields = [
-        "currency", "currency_rates", "currency_symbol", "country_neighbours", 
-        "country_phone", "country_capital", "country_code", "currency_code", 
-        "isp", "type", "city", "region", "longitude", "latitude", 
-        "timezone_name", "timezone", "org"
-    ]
-    for field in fields:
-        response = requests.get(f"http://ipwhois.app/line/{ip_address}?objects={field}")
-        print(f"{field.replace('_', ' ').capitalize()}: {response.text.strip()}")
+get_ip_info() {
+    clear_screen
+    read -p "Coloca la IP: " ip_address
+    fields=(
+        "currency" "currency_rates" "currency_symbol" "country_neighbours"
+        "country_phone" "country_capital" "country_code" "currency_code"
+        "isp" "type" "city" "region" "longitude" "latitude"
+        "timezone_name" "timezone" "org"
+    )
+    for field in "${fields[@]}"; do
+        response=$(curl -s "http://ipwhois.app/line/$ip_address?objects=$field")
+        echo "$(echo "$field" | tr '_' ' ' | awk '{print toupper(substr($0,1,1))tolower(substr($0,2))}'): $response"
+    done
+}
 
-def phone_infoga():
-    clear_screen()
-    numero = input("Coloca el numero de telefono Ejemplo +34XXXXXXXX: ")
-    os.system('cd ~/termuxpack/PhoneInfoga')
-    subprocess.run(['python3', 'phoneinfoga.py', '-n', numero])
+phone_infoga() {
+    clear_screen
+    read -p "Coloca el numero de telefono Ejemplo +34XXXXXXXX: " numero
+    cd ~/termuxpack/PhoneInfoga || exit
+    python3 phoneinfoga.py -n "$numero"
+}
 
-def web_scan():
-    clear_screen()
-    url = input("Pon la url de la web: ")
-    clear_screen()
-    subprocess.run(['host', url])
-    ipweb = input("Pon la ip de la web: ")
-    clear_screen()
-    subprocess.run(['whois', ipweb])
+web_scan() {
+    clear_screen
+    read -p "Pon la url de la web: " url
+    clear_screen
+    host "$url"
+    read -p "Pon la ip de la web: " ipweb
+    clear_screen
+    whois "$ipweb"
+}
 
-def nmap_scan():
-    os.system('cd ~/termuxpack/Scan-Nmap')
-    subprocess.run(['sh', 'scan.sh'])
+nmap_scan() {
+    cd ~/termuxpack/Scan-Nmap || exit
+    sh scan.sh
+}
 
-def phishing():
-    os.system('cd ~/termuxpack/zphisher')
-    subprocess.run(['bash', 'zphisher.sh'])
+phishing() {
+    cd ~/termuxpack/zphisher || exit
+    bash zphisher.sh
+}
 
-def osint():
-    clear_screen()
-    print("Coloca el nombre o nick")
-    print("si el nombre completo nombreapellido1apellido2")
-    print("va todo junto.")
-    time.sleep(5)
-    nick = input(": ")
-    clear_screen()
-    subprocess.run(['sudo', 'maigret', '-a', nick])
+osint() {
+    clear_screen
+    echo "Coloca el nombre o nick"
+    echo "si el nombre completo nombreapellido1apellido2"
+    echo "va todo junto."
+    sleep 5
+    read -p ": " nick
+    clear_screen
+    sudo maigret -a "$nick"
+}
 
+mask() {
+    cd ~/termuxpack/maskphish || exit
+    bash maskphish.sh
+}
 
-def mask():
-    os.system('cd ~/termuxpack/maskphish')
-    subprocess.run(['bash', 'maskphish.sh'])
+menu() {
+    clear_screen
+    echo "Creador By R3DGHOST"
+    echo ""
+    echo "[+] ------------------------- [+]"
+    echo "[+] 1 ---> Nmap"
+    echo "[+] 2 ---> Phishing"
+    echo "[+] 3 ---> Acortar Enlaces"
+    echo "[+] 4 ---> Phoneinfoga"
+    echo "[+] 5 ---> Osint"
+    echo "[+] 6 ---> IP info"
+    echo "[+] 7 ---> Update"
+    echo "[+] ------------------------- [+]"
+    echo ""
+    read -p ": " menu_option
 
-def menu():
-    clear_screen()
-    print("Creador By R3DGHOST")
-    print("")
-    print("[+] ------------------------- [+]")
-    print("[+] 1 ---> Nmap")
-    print("[+] 2 ---> Phishing")
-    print("[+] 3 ---> Acortar Enlaces")
-    print("[+] 4 ---> Phoneinfoga")
-    print("[+] 5 ---> Osint")
-    print("[+] 6 ---> IP info")
-    print("[+] 7 ---> Update")
-    print("[+] ------------------------- [+]")
-    print("")
-    menu_option = input(": ")
-    
-    if menu_option == '1':
-        nmap_scan()
-    elif menu_option == '2':
-        phishing()
-    elif menu_option == '3':
-        mask()
-    elif menu_option == '4':
-        phone_infoga()
-    elif menu_option == '5':
-        osint()
-    elif menu_option == '6':
-        get_ip_info()
-    elif menu_option == '7':
-        os.system('bash ~/termuxpack/update.sh')
-    else:
-        print("Opción no válida")
+    case "$menu_option" in
+        1) nmap_scan ;;
+        2) phishing ;;
+        3) mask ;;
+        4) phone_infoga ;;
+        5) osint ;;
+        6) get_ip_info ;;
+        7) bash ~/termuxpack/update.sh ;;
+        *) echo "Opción no válida" ;;
+    esac
+}
 
-if __name__ == "__main__":
-    menu()
+menu
