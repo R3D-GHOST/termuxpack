@@ -32,10 +32,9 @@ function ip() {
 
 function PhoneInfoga() {
     clear
-    cd tools/PhoneInfoga/
     echo "Coloca el numero de telefono Ejemplo +34XXXXXXXX"
     read -p ">>> " numero
-    python3 phoneinfoga.py -n "$numero"
+    python3 tools/PhoneInfoga/phoneinfoga.py -n "$numero"
 }
 
 function webscan() {
@@ -52,13 +51,11 @@ function webscan() {
 }
 
 function nmap() {
-    cd tools/Scan-Nmap/
-    sh scan.sh
+    sh tools/Scan-Nmap/scan.sh
 }
 
 function phis() {
-    cd tools/zphisher/
-    bash zphisher.sh
+    bash tools/zphisher/zphisher.sh
 }
 
 function osint() {
@@ -87,8 +84,7 @@ function ddos() {
 }
 
 function mask() {
-    cd tools/maskphish/
-    bash maskphish.sh
+    bash tools/maskphish/maskphish.sh
 }
 
 function menu() {
