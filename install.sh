@@ -13,7 +13,6 @@ pkg install -y python
 pkg install -y nmap
 pkg install -y tur-repo
 pkg install -y cloudflared
-pkg install -y slowhttptest
 pkg install -y whois
 pkg install -y host
 pkg install -y python3
@@ -25,7 +24,7 @@ pip install requests
 git clone --depth=1 https://github.com/htr-tech/zphisher.git
 git clone https://github.com/R3D-GHOST/Scan-Nmap.git
 git clone https://github.com/jaykali/maskphish.git
-git clone https://github.com/abhinavkavuri/PhoneInfoga
+git clone https://github.com/abhinavkavuri/PhoneInfoga.git
 
 # Configuración de PhoneInfoga
 cd PhoneInfoga
