@@ -34,7 +34,7 @@ function PhoneInfoga() {
     clear
     echo "Coloca el numero de telefono Ejemplo +34XXXXXXXX"
     read -p ">>> " numero
-    python3 tools/PhoneInfoga/phoneinfoga.py -n "$numero"
+    python3 PhoneInfoga/phoneinfoga.py -n "$numero"
 }
 
 function webscan() {
@@ -51,11 +51,11 @@ function webscan() {
 }
 
 function nmap() {
-    sh tools/Scan-Nmap/scan.sh
+    sh Scan-Nmap/scan.sh
 }
 
 function phis() {
-    bash tools/zphisher/zphisher.sh
+    bash zphisher/zphisher.sh
 }
 
 function osint() {
@@ -84,7 +84,7 @@ function ddos() {
 }
 
 function mask() {
-    bash tools/maskphish/maskphish.sh
+    bash maskphish/maskphish.sh
 }
 
 function menu() {
