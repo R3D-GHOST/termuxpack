@@ -22,7 +22,7 @@ def get_ip_info():
 def phone_infoga():
     clear_screen()
     numero = input("Coloca el numero de telefono Ejemplo +34XXXXXXXX: ")
-    os.system('cd PhoneInfoga')
+    os.system('cd ~/termuxpack/PhoneInfoga')
     subprocess.run(['python3', 'phoneinfoga.py', '-n', numero])
 
 def web_scan():
@@ -35,11 +35,11 @@ def web_scan():
     subprocess.run(['whois', ipweb])
 
 def nmap_scan():
-    os.system('cd Scan-Nmap')
+    os.system('cd ~/termuxpack/Scan-Nmap')
     subprocess.run(['sh', 'scan.sh'])
 
 def phishing():
-    os.system('cd zphisher')
+    os.system('cd ~/termuxpack/zphisher')
     subprocess.run(['bash', 'zphisher.sh'])
 
 def osint():
@@ -54,13 +54,13 @@ def osint():
 
 
 def mask():
-    os.system('cd maskphish')
+    os.system('cd ~/termuxpack/maskphish')
     subprocess.run(['bash', 'maskphish.sh'])
 
 def menu():
     clear_screen()
     print("Creador By R3DGHOST")
-    print("BETA 1")
+    print("")
     print("[+] ------------------------- [+]")
     print("[+] 1 ---> Nmap")
     print("[+] 2 ---> Phishing")
@@ -70,7 +70,7 @@ def menu():
     print("[+] 6 ---> IP info")
     print("[+] 7 ---> Update")
     print("[+] ------------------------- [+]")
-    
+    print("")
     menu_option = input(": ")
     
     if menu_option == '1':
@@ -86,7 +86,7 @@ def menu():
     elif menu_option == '6':
         get_ip_info()
     elif menu_option == '7':
-        subprocess.run(['sh', 'update.sh'])
+        os.system('bash ~/termuxpack/update.sh')
     else:
         print("Opción no válida")
 
