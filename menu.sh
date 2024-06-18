@@ -1,39 +1,41 @@
+#!/bin/bash
+
 function ip() {
     clear
     echo ""
-    read -p "Coloca la IP :" ip_address
+    read -p "Coloca la IP: " ip_address
     echo "" 
-    echo "Currency  : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency)" 
-    echo "Currency Rates : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency_rates)" 
-    echo "Currency Symbol : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency_symbol)" 
-    echo "Country neighbours : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_neighbours)" 
-    echo "Country phone : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_phone)" 
-    echo "Country capital : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_capital)" 
-    echo "Country code : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_code)" 
-    echo "Currency Code : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency_code)" 
+    echo "Currency: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency)" 
+    echo "Currency Rates: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency_rates)" 
+    echo "Currency Symbol: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency_symbol)" 
+    echo "Country neighbours: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_neighbours)" 
+    echo "Country phone: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_phone)" 
+    echo "Country capital: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_capital)" 
+    echo "Country code: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=country_code)" 
+    echo "Currency Code: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=currency_code)" 
     echo ""
-    echo "ISP : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=isp)" 
-    echo "IP address type : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=type)" 
+    echo "ISP: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=isp)" 
+    echo "IP address type: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=type)" 
     echo ""
-    echo "City : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=city)" 
-    echo "Region : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=region)" 
+    echo "City: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=city)" 
+    echo "Region: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=region)" 
     echo ""
-    echo "Longitude : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=longitude)" 
-    echo "Latitude : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=latitude)" 
+    echo "Longitude: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=longitude)" 
+    echo "Latitude: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=latitude)" 
     echo ""
-    echo "Timezone name : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=timezone_name)" 
-    echo "Timezone : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=timezone)" 
+    echo "Timezone name: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=timezone_name)" 
+    echo "Timezone: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=timezone)" 
     echo ""
-    echo "Organisation : $(curl -sS http://ipwhois.app/line/${ip_address}?objects=org)" 
+    echo "Organisation: $(curl -sS http://ipwhois.app/line/${ip_address}?objects=org)" 
     echo ""
 }
 
 function PhoneInfoga() {
     clear
-    cd tools/PhoneInfoga/
+    cd tools/PhoneInfoga/ || exit
     echo "Coloca el numero de telefono Ejemplo +34XXXXXXXX"
     read -p ">>> " numero
-    python3 phoneinfoga.py -n $numero
+    python3 phoneinfoga.py -n "$numero"
 }
 
 function webscan() {
@@ -41,21 +43,21 @@ function webscan() {
     echo "Pon la url de la web"
     read -p ">>> " url
     clear
-    host $url
+    host "$url"
     echo ""
     echo "Pon la ip de la web"
     read -p ">>> " ipweb
     clear
-    whois $ipweb
+    whois "$ipweb"
 }
 
 function nmap() {
-    cd tools/Scan-Nmap/
+    cd tools/Scan-Nmap/ || exit
     sh scan.sh
 }
 
 function phis() {
-    cd tools/zphisher
+    cd tools/zphisher || exit
     bash zphisher.sh
 }
 
@@ -70,7 +72,7 @@ function osint() {
     read -p ":" nick
     sleep 1
     clear
-    sudo maigret -a $nick
+    sudo maigret -a "$nick"
 }
 
 function ddos() {
@@ -81,12 +83,11 @@ function ddos() {
     echo ""
     read -p ">>> " url
     clear
-    banner
-    slowhttptest -R -u $url -c 1000 -a 10 -b 3000 -r 500
+    slowhttptest -R -u "$url" -c 1000 -a 10 -b 3000 -r 500
 }
 
 function mask() {
-    cd tools/maskphish/
+    cd tools/maskphish/ || exit
     bash maskphish.sh
 }
 
@@ -113,27 +114,25 @@ function menu() {
     echo ""
     echo "[+] 7 ---> Update"
     echo ""
+    echo "[+] 8 ---> IP Information" # Añadir opción para la función ip()
+    echo ""
     echo "[+] ------------------------- [+]"
     echo ""
     echo ""
     echo ""
     read -p ": " menu
 
-    if [ $menu = 1 ]; then
-        nmap
-    elif [ $menu = 2 ]; then
-        phis
-    elif [ $menu = 3 ]; then
-        mask
-    elif [ $menu = 4 ]; then
-        PhoneInfoga
-    elif [ $menu = 5 ]; then
-        osint
-    elif [ $menu = 6 ]; then
-        ddos
-    elif [ $menu = 7 ]; then
-        update.sh
-    fi
+    case $menu in
+        1) nmap ;;
+        2) phis ;;
+        3) mask ;;
+        4) PhoneInfoga ;;
+        5) osint ;;
+        6) ddos ;;
+        7) update.sh ;;
+        8) ip ;;  # Llamar a la función ip() cuando se elige la opción 8
+        *) echo "Opción no válida" ;;
+    esac
 }
 
 menu
