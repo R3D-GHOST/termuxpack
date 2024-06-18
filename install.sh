@@ -34,23 +34,12 @@ mv config.example.py config.py
 python3 -m pip install -r requirements.txt
 chmod +x *
 
-# Aquí va el contenido actual de tu script install.sh
+cd ../
 
-# Ruta al script menu.sh
-MENU_SCRIPT_PATH="~/path/to/menu.sh"
+cd
 
-# Asegúrate de que menu.sh tenga permisos de ejecución
-chmod +x "$MENU_SCRIPT_PATH"
+echo "bash termuxpack/menu.sh" > start.sh
 
-# Añadir `menu.sh` al inicio de bash (en ~/.bashrc)
-if ! grep -Fxq "bash $MENU_SCRIPT_PATH" ~/.bashrc; then
-    echo "bash $MENU_SCRIPT_PATH" >> ~/.bashrc
-fi
+chmod +x start.sh
 
-# Añadir `menu.sh` al inicio de zsh (en ~/.zshrc)
-if ! grep -Fxq "bash $MENU_SCRIPT_PATH" ~/.zshrc; then
-    echo "bash $MENU_SCRIPT_PATH" >> ~/.zshrc
-fi
-
-# Ejecutar `menu.sh` al finalizar `install.sh`
-bash "$MENU_SCRIPT_PATH"
+echo "Ejecuta con ./start.sh"
