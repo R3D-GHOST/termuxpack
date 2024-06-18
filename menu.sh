@@ -34,7 +34,8 @@ function PhoneInfoga() {
     clear
     echo "Coloca el numero de telefono Ejemplo +34XXXXXXXX"
     read -p ">>> " numero
-    python3 PhoneInfoga/phoneinfoga.py -n "$numero"
+    cd PhoneInfoga
+    python3 phoneinfoga.py -n "$numero"
 }
 
 function webscan() {
@@ -51,11 +52,13 @@ function webscan() {
 }
 
 function nmap() {
-    sh Scan-Nmap/scan.sh
+    cd Scan-Nmap
+    sh scan.sh
 }
 
 function phis() {
-    bash zphisher/zphisher.sh
+    cd zphisher
+    bash zphisher.sh
 }
 
 function osint() {
@@ -84,7 +87,8 @@ function ddos() {
 }
 
 function mask() {
-    bash maskphish/maskphish.sh
+    cd maskphish
+    bash maskphish.sh
 }
 
 function menu() {
@@ -106,11 +110,9 @@ function menu() {
     echo ""
     echo "[+] 5 ---> Osint"
     echo ""
-    echo "[+] 6 ---> DDoS"
+    echo "[+] 6 ---> IP info"
     echo ""
-    echo "[+] 7 ---> IP info"
-    echo ""
-    echo "[+] 8 ---> Update"
+    echo "[+] 7 ---> Update"
     echo ""
     echo "[+] ------------------------- [+]"
     echo ""
@@ -124,9 +126,8 @@ function menu() {
         3) mask ;;
         4) PhoneInfoga ;;
         5) osint ;;
-        6) ddos ;;
-        7) ip ;;
-        8) update.sh ;; 
+        6) ip ;;
+        7) update.sh ;; 
         *) echo "Opción no válida" ;;
     esac
 }
