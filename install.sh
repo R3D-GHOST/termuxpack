@@ -19,6 +19,7 @@ pkg install -y host
 pkg install -y python3
 pkg install -y python2
 pip install maigret
+pip install requests
 
 # Creación del directorio de herramientas y clonación de repositorios
 git clone --depth=1 https://github.com/htr-tech/zphisher.git
@@ -36,7 +37,7 @@ cd ../
 
 cd
 
-echo "bash termuxpack/menu.sh" > start.sh
+echo "python3 termuxpack/menu.py" > start.sh
 
 chmod +x start.sh
 
