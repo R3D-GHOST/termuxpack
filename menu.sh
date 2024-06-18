@@ -127,7 +127,7 @@ function menu() {
         4) PhoneInfoga ;;
         5) osint ;;
         6) ip ;;
-        7) update.sh ;; 
+        7) sh update.sh ;; 
         *) echo "Opción no válida" ;;
     esac
 }
