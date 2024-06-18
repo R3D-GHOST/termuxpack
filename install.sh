@@ -21,8 +21,6 @@ pkg install -y python2
 pip install maigret
 
 # Creación del directorio de herramientas y clonación de repositorios
-mkdir tools
-cd tools/
 git clone --depth=1 https://github.com/htr-tech/zphisher.git
 git clone https://github.com/R3D-GHOST/Scan-Nmap.git
 git clone https://github.com/jaykali/maskphish.git
@@ -42,4 +40,6 @@ echo "bash termuxpack/menu.sh" > start.sh
 
 chmod +x start.sh
 
-echo "Ejecuta con ./start.sh"
+echo "Se esta ejecutando recuerda ejecutar ./start.sh cada vez que inicies una nueva sesion en termux"
+sleep 4
+./start.sh
