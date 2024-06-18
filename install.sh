@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # POST INSTALL
-echo "Instalando las herramientas de para tu termux"
+echo "Instalando las herramientas para tu Termux"
 echo ""
 echo "By R3DGHOST - GHOSTRYZECOMPANY"
 sleep 3
@@ -37,7 +37,14 @@ chmod +x *
 # Volver al directorio home y configuración del script de inicio
 cd ~
 clear
-echo "termux-wake-lock ; shd ; cd ; cd termuxpack/ ; sh menu.sh ;" > start.sh
+echo "cd termuxpack/ ; sh menu.sh ;" > start.sh
 chmod +x start.sh
+
+# Configurar start.sh para que se ejecute al iniciar una nueva sesión
+for shell_rc in ~/.bashrc ~/.zshrc; do
+    if [ -f $shell_rc ]; then
+        echo "if [ -f ~/start.sh ]; then ~/start.sh; fi" >> $shell_rc
+    fi
+done
 
 echo "Instalación completa. Para iniciar, ejecuta './start.sh'"
