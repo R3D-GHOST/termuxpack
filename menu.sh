@@ -1,5 +1,5 @@
 
-function ip(){
+function ip() {
     clear
     echo ""
     read -p "Coloca la IP :" ip_address
@@ -28,6 +28,7 @@ function ip(){
     echo "Organisation : $(curl  -sS http://ipwhois.app/line/"$ip_address"?objects=org)" 
     echo ""
 }
+
 
 function PhoneInfoga(){
     clear
