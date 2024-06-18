@@ -37,7 +37,7 @@ cd ../
 
 cd
 
-echo "python3 termuxpack/menu.py" > start.sh
+echo "python3 ~/termuxpack/menu.py" > start.sh
 
 chmod +x start.sh
 
