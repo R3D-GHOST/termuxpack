@@ -34,17 +34,23 @@ mv config.example.py config.py
 python3 -m pip install -r requirements.txt
 chmod +x *
 
-# Volver al directorio home y configuración del script de inicio
-cd ~
-clear
-echo "cd termuxpack/ ; sh menu.sh ;" > start.sh
-chmod +x start.sh
+# Aquí va el contenido actual de tu script install.sh
 
-# Configurar start.sh para que se ejecute al iniciar una nueva sesión
-for shell_rc in ~/.bashrc ~/.zshrc; do
-    if [ -f $shell_rc ]; then
-        echo "if [ -f ~/start.sh ]; then ~/start.sh; fi" >> $shell_rc
-    fi
-done
+# Ruta al script menu.sh
+MENU_SCRIPT_PATH="~/path/to/menu.sh"
 
-echo "Instalación completa. Para iniciar, ejecuta './start.sh'"
+# Asegúrate de que menu.sh tenga permisos de ejecución
+chmod +x "$MENU_SCRIPT_PATH"
+
+# Añadir `menu.sh` al inicio de bash (en ~/.bashrc)
+if ! grep -Fxq "bash $MENU_SCRIPT_PATH" ~/.bashrc; then
+    echo "bash $MENU_SCRIPT_PATH" >> ~/.bashrc
+fi
+
+# Añadir `menu.sh` al inicio de zsh (en ~/.zshrc)
+if ! grep -Fxq "bash $MENU_SCRIPT_PATH" ~/.zshrc; then
+    echo "bash $MENU_SCRIPT_PATH" >> ~/.zshrc
+fi
+
+# Ejecutar `menu.sh` al finalizar `install.sh`
+bash "$MENU_SCRIPT_PATH"
