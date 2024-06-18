@@ -112,9 +112,9 @@ function menu() {
     echo ""
     echo "[+] 6 ---> DDoS"
     echo ""
-    echo "[+] 7 ---> Update"
+    echo "[+] 7 ---> IP info"
     echo ""
-    echo "[+] 8 ---> IP Information" 
+    echo "[+] 8 ---> Update"
     echo ""
     echo "[+] ------------------------- [+]"
     echo ""
@@ -129,8 +129,8 @@ function menu() {
         4) PhoneInfoga ;;
         5) osint ;;
         6) ddos ;;
-        7) update.sh ;;
-        8) ip ;; 
+        7) ip ;;
+        8) update.sh ;; 
         *) echo "Opción no válida" ;;
     esac
 }
